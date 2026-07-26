@@ -1,0 +1,32 @@
+#!/bin/bash
+
+source $HOME/.config/sway/scripts/variables
+
+SWAY_DEFAULT_WALLPAPER="$HOME/Pictures/.default_wallpaper.png" 
+CURRENT_WALLPAPER="$WALLPAPER_DIR"
+WALLPAPERS_DIR="$HOME/Pictures/Wallpapers"
+
+while SELECTED_WALLPAPER=$(
+    for file in $WALLPAPERS_DIR/{*.png,*.jpg,*webp,*jpeg}; do 
+        if [ -f "$file" ]; then 
+            echo $(basename $file)
+        fi 
+    done | sort | fuzzel --dmenu --placeholder="Select Wallpaper"); do
+    WALLPAPER_PATH="$WALLPAPERS_DIR/$SELECTED_WALLPAPER"
+
+    if [ -z $SELECTED_WALLPAPER ]; then
+        exit 0
+    else
+        if [ -e "$HOME/Pictures/.current-wallpaper" ]; then
+            rm -f "$CURRENT_WALLPAPER"
+        fi
+        ln -s "$WALLPAPER_PATH" "$CURRENT_WALLPAPER"
+        if [ $? = 1 ]; then
+            rm -f "$CURRENT_WALLPAPER"
+            ln -s "$WALLPAPER_PATH" "$CURRENT_WALLPAPER"
+        fi
+
+        swaymsg reload
+
+    fi
+done

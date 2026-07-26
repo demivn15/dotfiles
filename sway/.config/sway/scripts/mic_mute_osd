@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source $HOME/.config/sway/scripts/variables
+
+wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+FULL_ICON_DIR="$ICON_DIR/32x32/symbolic/status"
+MUTED=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -o '\[MUTED\]')
+
+if [ -n "$MUTED" ]; then
+	icon="$FULL_ICON_DIR/audio-input-microphone-muted-symbolic.svg"
+	notify-send "" "Microphone muted." \
+			-a "System" \
+			-u normal \
+			-i "file://$icon"
+else
+	icon="$FULL_ICON_DIR/audio-input-microphone-high-symbolic.svg"
+	notify-send "" "Microphone unmuted." \
+		-a "System" \
+		-u normal \
+		-i "file://$icon"
+fi

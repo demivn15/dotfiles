@@ -1,0 +1,18 @@
+#!/bin/bash
+
+source $HOME/.config/sway/scripts/variables
+
+MENU_DIR="$SCRIPTS_DIR/settings_menu"
+AVAILABLE_SETTINGS="Sway Settings\nWaybar Settings\nNetwork Settings\n"
+
+SELECTED_SETTING=$(printf "$AVAILABLE_SETTINGS" | sort | fuzzel --dmenu --placeholder="Settings Menu")
+
+if [ -z $SELECTED_SETTING ]; then
+    exit 0
+fi
+
+case "$SELECTED_SETTING" in
+    "Sway Settings")    "$MENU_DIR/sway_menu" ;;
+    "Waybar Settings")  "$MENU_DIR/waybar_menu" ;;
+    "Network Settings") "$MENU_DIR/network_menu" ;;
+esac

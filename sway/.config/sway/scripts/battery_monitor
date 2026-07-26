@@ -1,0 +1,121 @@
+#!/bin/bash
+
+source $HOME/.config/sway/scripts/variables
+
+BAT_PATH="/org/freedesktop/UPower/devices/battery_BAT0"
+FULL_ICON_DIR="$ICON_DIR/32x32/symbolic/status"
+STATE_FILE="/tmp/battery_monitor_last_state"
+WARN_TIME_FILE="/tmp/battery_monitor_warn_time"
+
+# Initialize states cleanly
+echo "none" > "$STATE_FILE"
+echo "0" > "$WARN_TIME_FILE"
+
+get_icon() {
+	# $1 = status, $2 = capacity
+	case "$1" in
+		"charging")      
+			if [ "$2" -le 10 ]; then echo "$FULL_ICON_DIR/battery-level-10-charging-symbolic.svg"
+			elif [ "$2" -le 20 ]; then echo "$FULL_ICON_DIR/battery-level-20-charging-symbolic.svg"
+			elif [ "$2" -le 30 ]; then echo "$FULL_ICON_DIR/battery-level-30-charging-symbolic.svg"
+			elif [ "$2" -le 40 ]; then echo "$FULL_ICON_DIR/battery-level-40-charging-symbolic.svg"
+			elif [ "$2" -le 50 ]; then echo "$FULL_ICON_DIR/battery-level-50-charging-symbolic.svg"
+			elif [ "$2" -le 60 ]; then echo "$FULL_ICON_DIR/battery-level-60-charging-symbolic.svg"
+			elif [ "$2" -le 70 ]; then echo "$FULL_ICON_DIR/battery-level-70-charging-symbolic.svg"
+			elif [ "$2" -le 80 ]; then echo "$FULL_ICON_DIR/battery-level-80-charging-symbolic.svg"
+			elif [ "$2" -le 90 ]; then echo "$FULL_ICON_DIR/battery-level-90-charging-symbolic.svg"
+			else echo "$FULL_ICON_DIR/battery-level-100-charged-symbolic.svg"
+			fi
+			;;
+		"fully-charged")  
+			echo "$FULL_ICON_DIR/battery-full-charged-symbolic.svg" 
+			;;
+		"discharging")
+			if [ "$2" -le 10 ]; then echo "$FULL_ICON_DIR/battery-level-0-symbolic.svg"
+			elif [ "$2" -le 10 ]; then echo "$FULL_ICON_DIR/battery-level-10-symbolic.svg"
+			elif [ "$2" -le 20 ]; then echo "$FULL_ICON_DIR/battery-level-20-symbolic.svg"
+			elif [ "$2" -le 30 ]; then echo "$FULL_ICON_DIR/battery-level-30-symbolic.svg"
+			elif [ "$2" -le 40 ]; then echo "$FULL_ICON_DIR/battery-level-40-symbolic.svg"
+			elif [ "$2" -le 50 ]; then echo "$FULL_ICON_DIR/battery-level-50-symbolic.svg"
+			elif [ "$2" -le 60 ]; then echo "$FULL_ICON_DIR/battery-level-60-symbolic.svg"
+			elif [ "$2" -le 70 ]; then echo "$FULL_ICON_DIR/battery-level-70-symbolic.svg"
+			elif [ "$2" -le 80 ]; then echo "$FULL_ICON_DIR/battery-level-80-symbolic.svg"
+			elif [ "$2" -le 90 ]; then echo "$FULL_ICON_DIR/battery-level-90-symbolic.svg"
+			else echo "$FULL_ICON_DIR/battery-level-100-symbolic.svg"
+			fi
+			;;
+		*) 
+			echo "$FULL_ICON_DIR/battery-missing-symbolic.svg" 
+			;;
+	esac
+}
+
+check_battery() {
+	stats=$(upower -i "$BAT_PATH")
+	status=$(echo "$stats" | grep "state:" | awk '{print $2}')
+	capacity=$(echo "$stats" | grep "percentage:" | awk '{print $2}' | tr -d '%')
+	LAST_NOTIFIED_STATE=$(cat "$STATE_FILE" 2>/dev/null || echo "none")
+
+	icon=$(get_icon "$status" "$capacity")
+
+	case "$status" in
+		"charging")
+			if [ "$LAST_NOTIFIED_STATE" != "charging" ]; then
+				echo "charging" > "$STATE_FILE"
+				echo "0" > "$WARN_TIME_FILE"
+				pw-play /usr/share/sounds/freedesktop/stereo/power-plug.oga &
+				notify-send "Charger Plugged" "Charging battery. Battery at ${capacity}%" \
+					-a "System" -u normal -i "file://$icon"
+			fi
+			;;
+
+		"discharging")
+			if [ "$LAST_NOTIFIED_STATE" != "discharging" ] && [ "$LAST_NOTIFIED_STATE" != "low" ] && [ "$LAST_NOTIFIED_STATE" != "critical" ]; then
+				echo "discharging" > "$STATE_FILE"
+				pw-play /usr/share/sounds/freedesktop/stereo/power-unplug.oga &
+				notify-send "Charger Unplugged" "Running on battery power: ${capacity}% remaining." \
+					-a "System" -u normal -i "file://$icon"
+				LAST_NOTIFIED_STATE="discharging"
+			fi
+
+			if [ "$capacity" -le 10 ]; then
+				if [ "$LAST_NOTIFIED_STATE" != "critical" ]; then
+					echo "critical" > "$STATE_FILE"
+					date +%s > "$WARN_TIME_FILE"
+					notify-send "Critical Battery" "Battery has dropped to ${capacity}%. System will hibernate soon. Connect the charger now!" \
+						-a "System" -u normal -i "file://$icon"
+				fi
+				if [ "$capacity" -le 5 ]; then
+					~/.config/sway/scripts/hibernation
+				fi
+			elif [ "$capacity" -le 20 ]; then
+				if [ "$LAST_NOTIFIED_STATE" != "low" ]; then
+					echo "low" > "$STATE_FILE"
+					brightnessctl set 1067 &
+					notify-send "Low Battery" "Running on battery power: ${capacity}% remaining." \
+						-a "System" -u normal -i "file://$icon"
+				fi
+			fi
+			;;
+
+		"fully-charged")
+			if [ "$LAST_NOTIFIED_STATE" != "fully-charged" ]; then
+				echo "fully-charged" > "$STATE_FILE"
+				echo "0" > "$WARN_TIME_FILE"
+				notify-send "Battery Fully Charged" "${capacity}% capacity reached." \
+					-a "System" -u normal -i "file://$icon"
+			fi
+			;;
+	esac
+}
+
+# Run once explicitly at bootup
+check_battery
+
+# Instead of piping commands directly to functions, we let the stream set off a simple flag loop
+upower --monitor-detail | grep --line-buffered -E "battery_BAT0|line_power_AC" | while read -r line; do
+	# Every time upower spits out lines, we run one clean check, then pause for 2 seconds.
+	# Any other duplicate text lines that arrived during this 2 second window are completely ignored.
+	check_battery
+	sleep 2
+done

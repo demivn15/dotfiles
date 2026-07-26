@@ -1,0 +1,16 @@
+#!/bin/bash
+
+source $HOME/.config/sway/scripts/variables
+
+exec > /dev/null 2>&1
+
+PLAYER_STATUS=$(playerctl status)
+PLAYER=$(swaymsg -t get_tree | grep -q '"app_id": "chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default"' && echo "Running" || echo "Not running")
+
+if [ "$PLAYER_STATUS" = "Playing" ]; then
+	if [ $PLAYER = "Running" ]; then
+		swaymsg output $DISPLAY dpms off
+	fi
+else
+	swaymsg output $DISPLAY dpms off
+fi

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+source $HOME/.config/sway/scripts/variables
+
+exec > /dev/null 2>&1
+
+WARN_TIME_FILE="/tmp/battery_monitor_warn_time"
+
+NOTIFICATION_SENT_TIME=$(cat "$WARN_TIME_FILE" 2>/dev/null || echo 0)
+CURRENT_TIME=$(date +%s)
+ELAPSED_TIME=$((CURRENT_TIME - NOTIFICATION_SENT_TIME))
+PLAYER_STATUS=$(playerctl status)
+
+if [ "$ELAPSED_TIME" -ge 180 ] || [ "$NOTIFICATION_SENT_TIME" -eq 0 ]; then
+	if [ "$PLAYER_STATUS" = "Playing" ]; then
+		playerctl pause 
+	fi
+	swaymsg input "$KEYBOARD" events disabled
+	swaymsg input "$KEYBOARD_EXTRA" events disabled
+	swaymsg input "$TOUCHPAD" events disabled
+	swaymsg input "$GENIUS_WIRELESS_MOUSE" events disabled
+	swaymsg output "*" dpms off 
+	sleep 1.5
+	dbus-send --system --print-reply \
+		--dest=org.freedesktop.login1 \
+		/org/freedesktop/login1 \
+		org.freedesktop.login1.Manager.Hibernate boolean:true
+	swaymsg input "$KEYBOARD" events enabled
+	swaymsg input "$KEYBOARD_EXTRA" events enabled
+	swaymsg input "$TOUCHPAD" events enabled
+	swaymsg input "$GENIUS_WIRELESS_MOUSE" events enabled
+	swaylock &
+	sleep 1
+	swaymsg output "*" dpms on
+fi

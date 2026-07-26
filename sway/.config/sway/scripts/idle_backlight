@@ -1,0 +1,17 @@
+#!/bin/bash
+
+exec > /dev/null 2>&1
+
+CURRENT_BRIGHTNESS=$(brightnessctl get)
+CALCULATED_BRIGHTNESS=$(awk -v cb="$CURRENT_BRIGHTNESS" 'BEGIN {print int(cb * 0.5)}')
+IDLE_BRIGHTNESS=$(($CURRENT_BRIGHTNESS - $CALCULATED_BRIGHTNESS))
+PLAYER_STATUS=$(playerctl status)
+PLAYER=$(swaymsg -t get_tree | grep -q '"app_id": "chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default"' && echo "Running" || echo "Not running")
+
+if [ "$PLAYER_STATUS" = "Playing" ]; then
+	if [ $PLAYER = "Running" ]; then
+		brightnessctl -s set $IDLE_BRIGHTNESS
+	fi
+else
+	brightnessctl -s set $IDLE_BRIGHTNESS
+fi

@@ -1,0 +1,58 @@
+* {
+    font-family: Inter, Font Awesome;
+    font-size: 16px;
+}
+
+window#waybar {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+tooltip {
+    background-color: #121212; 
+    border: 0px transparent;
+    border-radius: 0px;
+}
+
+tooltip label {
+    color: #e0e0e0;
+}
+
+.modules-left, .modules-center, .modules-right {
+    background-color: transparent;
+    border: 0px transparent;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+#workspaces button {
+    padding: 0px 5px;
+    border: 0px transparent;
+    background-color: transparent;
+    color: #666666;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    border: 0px transparent;
+    box-shadow: none;
+    -gtk-icon-shadow: none;
+}
+
+#workspaces button.focused {
+    background-color: transparent;
+    border: 0px transparent;
+    color: #ffffff;
+}
+
+#scratchpad.empty, #mpris.paused, #bluetooth.off, #bluetooth.disabled, #network.disconnected, #network.disabled {
+    color: #666666;
+}
+
+#custom-power:hover, #mpris.playing:hover, #bluetooth:hover, #network:hover {
+    color: #ffffff;
+}
+
+#mpris.paused:hover, #bluetooth.off:hover, #bluetooth.disabled:hover, #network.disconnected:hover, #network.disabled:hover {
+    color: #858585;
+}

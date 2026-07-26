@@ -1,0 +1,7 @@
+include $HOME/.config/sway/config.d/autostart
+include $HOME/.config/sway/config.d/input
+include $HOME/.config/sway/config.d/idle
+include $HOME/.config/sway/config.d/status_bar
+include $HOME/.config/sway/config.d/output
+include $HOME/.config/sway/config.d/layout
+include $HOME/.config/sway/config.d/key_bindings

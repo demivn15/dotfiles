@@ -1,0 +1,30 @@
+[warning]
+background=121212
+border=00000000
+border-bottom=00000000
+button-background=080808
+text=e0e0e0
+button-text=e0e0e0
+details-background=121212
+details-border-size=0
+button-border-size=0
+edge=bottom
+layer=overlay
+font=Inter 11
+output=eDP-1
+
+[error]
+background=121212
+border=00000000
+border-bottom=00000000
+button-background=080808
+text=e0e0e0
+button-text=e0e0e0
+details-background=121212
+details-border-size=0
+button-border-size=0
+edge=bottom
+layer=overlay
+font=Inter 11
+output=eDP-1
+

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source $HOME/.config/sway/scripts/variables
+
+MENU_DIR="$SCRIPTS_DIR/settings_menu"
+SETTINGS_DIR="$HOME/.config/waybar"
+
+AVAILABLE_SETTINGS="Waybar Layout\nWaybar Style\n"
+SELECTED_SETTING=$(printf "$AVAILABLE_SETTINGS" | sort | fuzzel --dmenu --placeholder="Waybar Settings")
+
+case "$SELECTED_SETTING" in
+    "Waybar Layout") $TERM -e nvim -o "$SETTINGS_DIR/config.jsonc" ;;
+    "Waybar Style") $TERM -e nvim -o "$SETTINGS_DIR/style.css" ;;
+    *) exit ;;
+esac

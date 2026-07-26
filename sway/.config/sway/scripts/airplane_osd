@@ -1,0 +1,25 @@
+#!/bin/bash
+
+source $HOME/.config/sway/scripts/variables
+
+RFKILL_EXEC="/usr/sbin/rfkill"
+FULL_ICON_DIR="$ICON_DIR/32x32/symbolic/status"
+
+sleep 0.1
+
+WIFI_BLOCKED=$($RFKILL_EXEC list wlan | grep -q "Soft blocked: yes" && echo "yes" || echo "no")
+BT_BLOCKED=$($RFKILL_EXEC list bluetooth | grep -q "Soft blocked: yes" && echo "yes" || echo "no")
+
+if [ "$WIFI_BLOCKED" = "yes" ] || [ "$BT_BLOCKED" = "yes" ]; then
+    STATUS="on"
+    ICON="$FULL_ICON_DIR/airplane-mode-symbolic.svg"
+else
+    STATUS="off"
+    ICON="$FULL_ICON_DIR/airplane-mode-disabled-symbolic.svg"
+fi
+
+echo "$ICON"
+notify-send "" "Airplane Mode ${STATUS}." \
+    -i "file://$ICON" \
+    -u normal \
+    -a "System"

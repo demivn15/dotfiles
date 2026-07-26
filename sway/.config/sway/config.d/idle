@@ -1,0 +1,11 @@
+# Idle configuration
+# Information in: 'man swayidle'
+
+include $HOME/.config/sway/config.d/variables
+
+exec swayidle -w \
+	timeout 300 '$SCRIPTS_DIR/idle_backlight' resume 'brightnessctl -r' \
+	timeout 330 '$SCRIPTS_DIR/idle_output'    resume 'swaymsg "output eDP-1 dpms on"' \
+	timeout 360 '$SCRIPTS_DIR/idle_lock' \
+	timeout 600 '$SCRIPTS_DIR/idle_suspend' \
+	before-sleep 'playerctl pause'

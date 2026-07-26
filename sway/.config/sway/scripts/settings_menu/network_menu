@@ -1,0 +1,17 @@
+#!/bin/bash
+
+source $HOME/.config/sway/scripts/variables
+
+MENU_DIR="$SCRIPTS_DIR/settings_menu"
+AVAILABLE_SETTINGS="Wi-Fi Settings\nBluetooth Settings\n"
+
+SELECTED_SETTING=$(printf "$AVAILABLE_SETTINGS" | sort | fuzzel --dmenu --placeholder="Network Settings")
+
+if [ -z $SELECTED_SETTING ]; then
+    exit 0
+fi
+
+case "$SELECTED_SETTING" in
+    "Wi-Fi Settings") "$MENU_DIR/wifi_menu" ;;
+    "Bluetooth Settings") exit ;;
+esac

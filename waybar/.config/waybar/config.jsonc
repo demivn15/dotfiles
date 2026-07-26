@@ -1,0 +1,105 @@
+{
+    "layer": "top", 
+    "output": "eDP-1",
+    "position": "top",
+    "height": 40, 
+    "spacing": 20,
+    "modules-left": [
+        "custom/power",
+        "mpris"
+    ],
+    "modules-center": [
+        "sway/workspaces",
+        "sway/scratchpad"
+    ],
+    "modules-right": [
+        "tray",
+        "wireplumber",
+        "backlight",
+        "bluetooth",
+        "network",
+        "battery",
+        "clock"
+    ],
+    "custom/power": {
+        "format" : "{icon}",
+        "format-icons": ["&#xf011;"],
+        "on-click": "flock -n /tmp/wlogout.lock -c '/usr/bin/wlogout'",
+        "tooltip": false
+    },
+    "mpris": {
+        "format-playing": "<span weight='bold'>{artist}</span> - {title}   {status_icon}",
+        "format-paused": "<span weight='bold'>{artist}</span> - {title}   {status_icon}",
+        "artist-len": 15,
+        "title-len": 15,
+        "status-icons": {
+            "playing": "&#xf04c;",
+            "paused": "&#xf04b;"
+        },
+        "on-click": "playerctl play-pause",
+        "on-click-midle": "echo",
+        "on-click-right": "echo",
+        "tooltip": false
+    },
+    "sway/workspaces":{
+        "all-outputs": true,
+        "disable-scroll": true,
+        "format": "{name}",
+        "disable-click": true,
+        "persistent-workspaces":{
+            "1": [], "2": []
+        }
+    },
+    "sway/scratchpad": {
+        "format": "{icon}  {count}",
+        "format-icons": ["&#xf2d0;"],
+        "show-empty": true,
+        "tooltip": false
+    },
+    "tray": {
+        "icon-size": 16,
+        "show-passive-items": true,
+        "spacing": 10,
+        "tooltip": false
+    },
+    "wireplumber": {
+        "format": "&#xf028; {volume}%",
+        "format-muted": "&#xf026; {volume}% (Muted)",
+        "tooltip": false
+    },
+    "backlight": {
+        "format": "&#xf185; {percent}%",
+        "tooltip": false
+    },
+    "bluetooth": {
+        "format": "&#xf294;",
+        "format-disabled": "&#xf294;",
+        "on-click": "bluetooth toggle",
+        "tooltip": true,
+        "tooltip-format": "Bluetooth {status}"
+    },
+    "network": {
+        "format-wifi": "&#xf1eb;",
+        "format-disabled": "&#xf1eb;",
+        "format-disconnected": "&#xf1eb;",
+        "tooltip-format-wifi": "{essid}",
+        "tooltip-format-disabled": "Airplane mode on",
+        "tooltip-format-disconnected": "Wi-Fi disabled",
+        "on-click": "if [ $(nmcli -fields STATE g | sed -n 2p) = 'disconnected' ]; then nmcli device connect wlp0s20f3; else nmcli device disconnect wlp0s20f3; fi",
+        "tooltip": true
+    },
+    "battery": {
+        "interval": 1,
+        "format": "{icon} {capacity}%",
+        "format-icons": {
+            "default": ["&#xf240;"],
+            "charging": ["&#xf1e6;"]
+        },
+        "tooltip": false
+    },
+    "clock": {
+        "interval": 1,
+        "format": "{:%a, %B %d, %Y %H:%M}",
+        "tooltip": false
+    }
+}

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+source $HOME/.config/sway/scripts/variables
+
+SAVE_DIR="$HOME/Pictures/Screenshots"
+FULL_ICON_DIR="$ICON_DIR/32x32/symbolic/emblems"
+FILENAME="Screenshot-$(date +%Y-%m-%d-%H-%M-%S).png"
+FULL_PATH="$SAVE_DIR/$FILENAME"
+
+# Ensure the pictures directory exists
+mkdir -p "$SAVE_DIR"
+
+# 1. Get the geometry interactively via slurp
+GEOMETRY=$(slurp 2>/dev/null)
+
+# 2. Check if user cancelled slurp (escaped)
+if [ -z "$GEOMETRY" ]; then
+	pw-play /usr/share/sounds/freedesktop/stereo/dialog-error.oga &
+	notify-send "Screenshot" "Failed to take the screenshot. No region was selected." \
+		-a "System" \
+		-u low \
+		-i "file://$FULL_ICON_DIR/emblem-important-symbolic.svg"
+	exit 0
+fi
+
+# 3. Take the screenshot, save it, and pipe to clipboard
+if grim -g "$GEOMETRY" - | tee "$FULL_PATH" | wl-copy -t image/png; then
+	pw-play /usr/share/sounds/freedesktop/stereo/screen-capture.oga &
+	notify-send "Screenshot" "Screenshot saved to ~/Pictures/$FILENAME\nCopied to clipboard." \
+		-a "System" \
+		-u normal \
+		-i "file://$FULL_PATH"
+else
+	pw-play /usr/share/sounds/freedesktop/stereo/dialog-error.oga &
+	notify-send "Screenshot" "Failed to take the screenshot. An error occurred while capturing the screen." \
+		-a "System" \
+		-u critical \
+		-i "file://$FULL_ICON_DIR/emblem-important-symbolic.svg"
+fi

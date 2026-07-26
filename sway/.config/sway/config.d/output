@@ -1,0 +1,9 @@
+# Output configuration
+# Information in: 'man 5 sway-output' \
+# 		  'swaymsg -t get_outputs'
+
+include $HOME/.config/sway/config.d/variables
+
+output $DISPLAY {
+	background "$WALLPAPER_DIR" fill $WALLPAPER_COLOR
+}

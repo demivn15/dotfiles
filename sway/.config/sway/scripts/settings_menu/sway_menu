@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source $HOME/.config/sway/scripts/variables
+
+MENU_DIR="$SCRIPTS_DIR/settings_menu"
+SETTINGS_DIR="$CONFIG_DIR"
+AVAILABLE_SETTINGS="Autostart Settings\nIdle Settings\nInput Settings\nKeybindings Settings\nLayout Settings\nWallpaper Settings"
+
+SELECTED_SETTING=$(printf "$AVAILABLE_SETTINGS" | sort | fuzzel --dmenu --placeholder="Sway Settings")
+
+if [ -z $SELECTED_SETTING ]; then
+    exit 0
+fi
+
+case "$SELECTED_SETTING" in
+    "Autostart Settings")   $TERM -e nvim -o "$SETTINGS_DIR/autostart" ;;
+    "Idle Settings")        $TERM -e nvim -o "$SETTINGS_DIR/idle" ;;
+    "Input Settings")       $TERM -e nvim -o "$SETTINGS_DIR/input" ;;
+    "Keybindings Settings") $TERM -e nvim -o "$SETTINGS_DIR/key_bindings" ;;
+    "Layout Settings")      $TERM -e nvim -o "$SETTINGS_DIR/layout" ;;
+    "Wallpaper Settings")   "$MENU_DIR/wallpaper_menu" ;; 
+esac

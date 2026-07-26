@@ -1,0 +1,75 @@
+\documentclass[manuscript,noextraspace]{apa7}
+
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage[style=apa,backend=biber]{biblatex}
+
+% Add your bibliography file here
+% \addbibresource{references.bib}
+
+\title{Your Title Here: Capitalize Major Words}
+\shorttitle{Running Head Version of Title}
+
+\authorsnames{Author One, Author Two}
+\authorsaffiliations{Department of Psychology, University of Examples}
+
+\leftheader{One \& Two}
+
+\abstract{
+This is the abstract section of the document. The abstract should be a single paragraph summary of your paper, typically between 150 and 250 words. It should concisely describe the research problem, methods, results, and conclusions of your study. Ensure that it matches the core message of your full manuscript without adding extraneous details.
+}
+
+\keywords{APA format, LaTeX template, academic writing, apa7 package}
+
+\authornote{
+    \addtoauthorsaffiliations
+    Correspondence concerning this article should be addressed to Author One, Department of Psychology, University of Examples, 123 University Way, City, State, 12345. Email: author.one@example.edu
+}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This is the introduction section of your paper. In APA 7th edition format using the \texttt{apa7} document class, the title of your paper automatically acts as the first heading, so you should not manually add an ``Introduction'' heading. 
+
+Here is how you can perform in-text citations. For a parenthetical citation, you might say something about a finding \parencite{Sample202X}. Alternatively, for a narrative citation, you can mention that \textcite{Sample202X} discovered something unique.
+
+\subsection{Background of the Problem}
+You can create subsection headings easily. Subsections in APA 7 are bolded, left-aligned, and the text begins on a new line as a regular paragraph.
+
+\section{Method}
+The method section describes in detail how the study was conducted. This enables other researchers to replicate your work.
+
+\subsection{Participants}
+Describe the sample demographics, sample size, and selection criteria here.
+
+\subsection{Materials and Measures}
+List the equipment, psychometric tests, software, or other materials utilized.
+
+\subsection{Procedure}
+Explain the sequential steps taken to execute the study.
+
+\section{Results}
+Present the findings of your statistical analysis or qualitative findings here. You can also embed tables and figures.
+
+\begin{table}[htbp]
+\caption{Sample Descriptive Statistics of the Study Cohort}
+\label{tab:sample_table}
+\centering
+\begin{tabular}{lccc}
+\hline
+Variable & $M$ & $SD$ & $N$ \\
+\hline
+Age (Years) & 24.5 & 3.2 & 120 \\
+Score A & 78.2 & 11.4 & 120 \\
+Score B & 85.1 & 9.6 & 120 \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Discussion}
+Evaluate and interpret your results in the context of your original hypotheses and previous literature. Discuss limitations and future research directions.
+
+\printbibliography
+
+\end{document}

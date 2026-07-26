@@ -1,0 +1,13 @@
+@define-color bg_nor #121212;
+@deifne-color bg_mut #080808;
+@deifne-color bg_hig #262626;
+@define-color fg_nor #e0e0e0;
+@define-color fg_nor_hov #ffffff;
+@define-color fg_mut #666666;
+@define-color fg_mut_hov #858585;
+@define-color ac_red #ff6b6b;
+@define-color ac-org #ff9f43;
+@define-color ac-grn #1dd1a1;
+@define-color ac-cyn #48dbfb;
+@define-color ac-blu #54a0ff;
+@define-color ac-pur #9b5de5;

@@ -1,0 +1,29 @@
+# Input configuration
+# Information in: 'man 5 sway-input' \
+# 		  'swaymsg -t get_inputs'
+
+include $HOME/.config/sway/config.d/variables
+
+input $KEYBOARD {
+	xkb_layout latam
+}
+
+input $KEYBOARD_EXTRA {
+	xkb_layout latam
+}
+
+input $TOUCHPAD {
+	click_method button_areas
+	drag_lock disabled
+	dwtp disabled
+	natural_scroll enabled
+	scroll_method two_finger
+	tap enabled
+}
+
+input $GENIUS_WIRELESS_MOUSE {
+	drag_lock disabled
+	dwtp disabled
+}
+
+seat seat0 xcursor_theme $CURSOR_THEME $CURSOR_SIZE 

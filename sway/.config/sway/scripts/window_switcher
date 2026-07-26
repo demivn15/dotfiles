@@ -1,0 +1,24 @@
+#!/bin/bash
+
+AVAILABLE_CONTAINERS=$(swaymsg -t get_tree | jq -r '
+  [recurse(.nodes[], .floating_nodes[])] 
+  | .[] 
+  | select(.name != null and .type != "workspace" and .type != "output" and .nodes == []) 
+  | "\(.id) \(.name)"
+')
+
+if [ -z "$AVAILABLE_CONTAINERS" ]; then
+    exit 0
+fi
+
+SELECTED_CONTAINER=$(printf "$AVAILABLE_CONTAINERS" | fuzzel --dmenu --placeholder="Container Menu")
+
+if [ -z "$SELECTED_CONTAINER" ]; then
+    exit 0
+fi
+
+WINDOW_ID=$(echo "$SELECTED_CONTAINER" | awk '{print $1}')
+
+if [[ "$WINDOW_ID" =~ ^[0-9]+$ ]]; then
+    swaymsg "[con_id=$WINDOW_ID] focus" 2>/dev/null || swaymsg "[id=$WINDOW_ID] focus"
+fi

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for file in {*.png,*.jpg,*webp,*jpeg}; do
+    if [ -f "$file" ]; then
+        convert "$file" -resize $1x$2 "$file"
+        echo "$file successfuly resized to dimensions $1x$2"
+    else
+        echo "Error resizing $file"
+    fi
+done
