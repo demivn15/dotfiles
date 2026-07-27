@@ -5,8 +5,11 @@ xwayland force
 floating_modifier Mod4 normal
 floating_maximum_size 1280 x 720
 
-default_border          none
-default_floating_border none
+default_border          pixel 1
+default_floating_border pixel 1
+
+client.focused   #2f2f2f #2f2f2f #e0e0e0 #2f2f2f #2f2f2f
+client.unfocused #2f2f2f #2f2f2f #e0e0e0 #2f2f2f #2f2f2f
 
 focus_follows_mouse always
 mouse_warping container
