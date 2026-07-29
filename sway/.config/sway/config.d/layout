@@ -8,6 +8,11 @@ floating_maximum_size 1280 x 720
 default_border          pixel 1
 default_floating_border pixel 1
 
+gaps {
+        inner 20
+        outer 10
+    }
+
 client.focused   #2f2f2f #2f2f2f #e0e0e0 #2f2f2f #2f2f2f
 client.unfocused #2f2f2f #2f2f2f #e0e0e0 #2f2f2f #2f2f2f
 

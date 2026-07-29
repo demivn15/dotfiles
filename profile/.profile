@@ -27,5 +27,5 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 # If running from tty1 start sway
-[ "$(tty)" = "/dev/tty1" ] && exec sway
+# [ "$(tty)" = "/dev/tty1" ] && exec sway
 . "$HOME/.cargo/env"
