@@ -1,0 +1,17 @@
+input {
+    keyboard {
+        xkb {
+            layout "latam"
+        }
+    }
+    touchpad {
+        tap
+        drag true
+        natural-scroll
+        scroll-method "two-finger"
+        click-method "button-areas"
+    }
+    mouse {
+    }
+    warp-mouse-to-focus
+}
