@@ -47,7 +47,7 @@
         "format": "{name}",
         "disable-click": true,
         "persistent-workspaces":{
-            "1": [], "2": []
+            "1": [], "2": [], "3": [], "4": [], "5": []
         }
     },
     "sway/scratchpad": {

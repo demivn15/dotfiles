@@ -8,3 +8,8 @@ window-rule {
     clip-to-geometry true
 }
 
+window-rule {
+    match app-id="foot"
+    opacity 0.95 
+    draw-border-with-background false
+}

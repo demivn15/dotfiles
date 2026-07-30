@@ -1,11 +1,8 @@
 layout {
     gaps 20
     center-focused-column "never"
-    always-center-single-column
-    default-column-display "tabbed"
-    tab-indicator {
-        off
-    }
+    //always-center-single-column
+    default-column-display "normal"
     preset-column-widths {
         proportion 0.5
         proportion 0.5
@@ -17,4 +14,9 @@ layout {
     border {
         width 1
     }
+}
+
+layer-rule {
+  match namespace="^noctalia-backdrop"
+  place-within-backdrop true
 }

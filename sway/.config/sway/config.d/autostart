@@ -1,6 +1,5 @@
 include $HOME/.config/sway/config.d/variables
 
-exec --no-startup-id pw-play "$SOUNDS_DIR/service-login.oga"
 exec                 systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK
 exec                 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
 exec                 mako

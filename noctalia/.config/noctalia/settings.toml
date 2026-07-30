@@ -1,0 +1,269 @@
+config_version = 8
+
+[audio]
+enable_sounds = true
+sound_volume = 0.99999997764825821
+
+[backdrop]
+blur_intensity = 0.29999999329447746
+enabled = true
+tint_intensity = 0.39999999105930328
+
+[bar.default]
+center = [ "workspaces", "control-center" ]
+concave_edge_corners = false
+end = [ "tray", "volume", "brightness", "bluetooth", "network", "battery", "notifications", "clock" ]
+font_weight = 400
+hover_highlight = false
+margin_ends = 0
+padding = 20
+radius = 0
+scale = 1.2500000111758709
+shadow = false
+start = [ "session", "media" ]
+thickness = 40
+widget_spacing = 15
+
+    [bar.default.dead_zone.actions]
+    right = "none"
+
+[battery]
+warning_threshold = 20
+
+[brightness]
+minimum_brightness = 0.04999999888241291
+
+[desktop_widgets]
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[idle]
+behavior_order = [ "Dim Screen", "screen-off", "lock", "lock-and-suspend" ]
+
+    [idle.behavior."Dim Screen"]
+    action = "command"
+    command = "~/.config/sway/scripts/idle_backlight"
+    enabled = false
+    resume_command = "brightnessctl -r"
+    timeout = 300.0
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 360.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 600.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 330.0
+
+[lockscreen]
+fingerprint = false
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-0000000000000002", "lockscreen-widget-0000000000000003" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 103.0
+    box_width = 400.0
+    cx = 960.0
+    cy = 943.5
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = true
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "compact"
+        show_caps_lock = true
+        show_keyboard_layout = false
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_weather = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    box_height = 144.0
+    box_width = 320.0
+    cx = 976.0
+    cy = 244.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000003]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 352.0
+    cy = 540.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "media_player"
+
+[notification]
+offset_y = 0
+position = "top_center"
+
+[osd]
+background_opacity = 0.99999997764825821
+
+    [osd.kinds]
+    brightness = false
+    dnd = false
+    keyboard_backlight = false
+    keyboard_layout = false
+    lock_keys = false
+    media = false
+    nightlight = false
+    power_profile = false
+    volume = false
+
+[[plugins.source]]
+kind = "git"
+location = "https://github.com/noctalia-dev/official-plugins"
+name = "official"
+
+[[plugins.source]]
+enabled = false
+kind = "git"
+location = "https://github.com/noctalia-dev/community-plugins"
+name = "community"
+
+[shell]
+date_format = ":%a, %B %d, %Y"
+font_family = "Inter"
+polkit_agent = true
+popup_shadows = false
+settings_show_advanced = false
+
+    [shell.launcher]
+    categories = false
+
+    [shell.panel]
+    wallpaper_placement = "floating"
+    wallpaper_position = "center"
+
+    [shell.screenshot]
+    directory = "~/Pictures/Screenshots"
+
+    [[shell.session.actions]]
+    action = "shutdown"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "5"
+    variant = "destructive"
+
+    [[shell.session.actions]]
+    action = "reboot"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "4"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "lock"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "1"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "logout"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "2"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "lock_and_suspend"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "3"
+    variant = "default"
+
+    [shell.shadow]
+    alpha = 0.0
+
+[theme]
+builtin = "Ayu"
+community_palette = "Breeze"
+mode = "dark"
+source = "wallpaper"
+wallpaper_scheme = "m3-monochrome"
+
+    [theme.templates]
+    builtin_ids = [ "niri" ]
+    enable_community_templates = false
+
+[wallpaper]
+fill_mode = "fit"
+transition = []
+
+    [wallpaper.default]
+    path = "/home/demivn15/Pictures/Wallpapers/wp3950018-4193121365.jpg"
+
+    [wallpaper.last]
+    path = "/home/demivn15/Pictures/Wallpapers/wp3950018-4193121365.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/demivn15/Pictures/Wallpapers/wp3950018-4193121365.jpg"
+
+[weather]
+enabled = false
+
+[widget.clock]
+format = "{:%a, %B %d, %Y %H:%M}"
+
+[widget.control-center]
+glyph = "menu"
+
+    [widget.control-center.actions]
+    middle = "none"
+
+[widget.media]
+artist_first = true
+hide_album_art = true
+hide_when_no_media = true
+
+    [widget.media.actions]
+    back = "none"
+    forward = "none"
+    left = "media toggle"
+    right = "none"
+    scroll_down = "none"
+    scroll_up = "none"
+
+[widget.network]
+show_label = false
+
+[widget.session.actions]
+middle = "none"
+
+[widget.workspaces]
+capsule_radius = "auto"
+interactive = false
+style = "minimal"

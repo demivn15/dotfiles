@@ -30,7 +30,7 @@
 }
 {
     "label" : "logout",
-    "action" : "pw-play /usr/share/sounds/freedesktop/stereo/service-logout.oga && swaymsg exit",
+    "action" : "swaymsg exit",
     "text" : "Logout",
     "keybind" : "e"
 }
