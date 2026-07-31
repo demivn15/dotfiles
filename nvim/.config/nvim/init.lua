@@ -54,7 +54,8 @@ vim.opt.mouse = ""
 vim.keymap.set("n", "<space>t", "<cmd>Telescope<cr>")
 vim.keymap.set("n", "<space>ff", "<cmd>Telescope find_files<cr>")
 vim.keymap.set("n", "<space>fb", "<cmd>Telescope buffers<cr>")
+vim.keymap.set("n", "<space>fg", "<cmd>Telescope live_grep<cr>")
 
 -- Snippets
-vim.keymap.set("n", ",c-main", "<cmd>-1read ~/.config/nvim/snippets/c-snippets/c-main.c<cr>o")
-vim.keymap.set("n", ",doc-template", "<cmd>-1read ~/.config/nvim/snippets/latex-snippets/doc-template.tex<cr>9jvi")
+vim.keymap.set("n", "<space>cm", "<cmd>-1read ~/.config/nvim/snippets/c-snippets/c-main.c<cr>o")
+vim.keymap.set("n", "<space>lt", "<cmd>-1read ~/.config/nvim/snippets/latex-snippets/doc-template.tex<cr>9jvi")

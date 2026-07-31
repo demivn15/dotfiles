@@ -49,6 +49,8 @@ binds {
     Ctrl+Alt+Tab          repeat=false           { toggle-overview; }
     Mod+P                                        { spawn "wdisplays"; }
     Super+L                                      { spawn-sh "noctalia msg session lock"; }
+    Alt+Tab                                      { spawn ""; }
+    Mod+Tab                                      { spawn-sh "noctalia msg window-switcher"; }
 }
 
 gestures {
