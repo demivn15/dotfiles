@@ -2,7 +2,7 @@ binds {
     Mod+T     hotkey-overlay-title="Open Terminal"               { spawn "foot"; }
     Mod+Space hotkey-overlay-title="Run an Application Launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+B                                                        { spawn "helium"; }
-    Mod+E                                                        { spawn "nemo"; }
+    Mod+E                                                        { spawn "nautilus"; }
 
     Mod+Q repeat=false { close-window; }
     Mod+Shift+Delete   { spawn-sh "noctalia msg panel-toggle session"; }
@@ -43,7 +43,7 @@ binds {
     XF86AudioMicMute      allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn-sh "noctalia msg brightness-down"; }
     XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "noctalia msg brightness-up"; }
-    XF86Calculator                               { spawn "galculator"; }
+    XF86Calculator                               { spawn "gnome-calculator"; }
     Mod+Shift+S                                  { spawn-sh "noctalia msg screenshot-region"; }
     Super+I                                      { spawn-sh "noctalia msg settings-toggle"; }
     Ctrl+Alt+Tab          repeat=false           { toggle-overview; }

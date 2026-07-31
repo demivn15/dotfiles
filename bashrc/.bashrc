@@ -116,6 +116,7 @@ export TERM=xterm-256color
 export EDITOR=nvim
 export VISUAL=zed
 
+alias cmatrix="cmatrix -C red"
 open() {
     xdg-open "$@" >/dev/null 2>&1 &
     disown
@@ -125,3 +126,5 @@ open() {
 [ -f ~/.nixprompt.bash ] && source ~/.nixprompt.bash
 
 . "$HOME/.cargo/env"
+
+fastfetch

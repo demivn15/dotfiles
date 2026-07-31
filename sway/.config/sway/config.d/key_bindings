@@ -6,7 +6,7 @@ include $HOME/.config/sway/config.d/variables
 set $terminalEmulator $TERM
 set $applicationMenu  fuzzel
 set $webBrowser       helium --ozone-platform=wayland --use-webgpu-adapter=opengles
-set $fileManager      nemo
+set $fileManager      nautilus
 
 bindsym Mod4+t     exec $terminalEmulator
 bindsym Mod4+Space exec $applicationMenu

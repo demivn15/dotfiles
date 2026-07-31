@@ -4,7 +4,7 @@
 
 SCRIPTS_DIR="$HOME/.config/sway/scripts"
 SOUNDS_DIR="/usr/share/sounds/freedesktop/stereo"
-ICON_DIR="$HOME/.icons/Papirus-Dark"
+ICON_DIR="/usr/share/icons/Adwaita"
 CONFIG_DIR="$HOME/.config/sway/config.d"
 TERM=foot
 
@@ -12,8 +12,8 @@ KEYBOARD="1:1:AT_Translated_Set_2_keyboard"
 KEYBOARD_EXTRA="0:0:Ideapad_extra_buttons"
 TOUCHPAD="1267:12728:ELAN06FA:00_04F3:31B8_Touchpad"
 GENIUS_WIRELESS_MOUSE="592:13330:Genius_Wireless_Mouse"
-CURSOR_THEME="McMojave-cursors"
-CURSOR_SIZE=24
+CURSOR_THEME="Hackneyed-36px"
+CURSOR_SIZE=36
 
 DISPLAY="eDP-1"
 WALLPAPER_DIR="$HOME/Pictures/.current-wallpaper"

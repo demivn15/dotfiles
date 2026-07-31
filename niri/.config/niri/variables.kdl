@@ -1,2 +1,6 @@
 prefer-no-csd
 screenshot-path null
+cursor {
+    xcursor-theme "Hackneyed-36px"
+    xcursor-size 36
+}

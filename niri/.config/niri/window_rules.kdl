@@ -10,6 +10,24 @@ window-rule {
 
 window-rule {
     match app-id="foot"
+    match app-id="ZenNotes"
     opacity 0.95 
     draw-border-with-background false
+}
+
+// YouTube Music
+window-rule {
+    match app-id="chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default"
+    open-floating true
+    default-column-width { fixed 1280; }
+    default-window-height { fixed 768; }
+    opacity 0.95 
+    draw-border-with-background false
+}
+
+window-rule {
+    match app-id="chrome-eppojlglocelodeimnohnlnionkobfln-Default" // Netflix
+    match app-id="gimp"
+    match app-id="org.inkscape.Inkscape"
+    open-maximized true
 }

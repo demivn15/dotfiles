@@ -10,8 +10,8 @@ set $KEYBOARD 1:1:AT_Translated_Set_2_keyboard
 set $KEYBOARD_EXTRA 0:0:Ideapad_extra_buttons
 set $TOUCHPAD 1267:12728:ELAN06FA:00_04F3:31B8_Touchpad
 set $GENIUS_WIRELESS_MOUSE 592:13330:Genius_Wireless_Mouse
-set $CURSOR_THEME McMojave-cursors
-set $CURSOR_SIZE 24
+set $CURSOR_THEME Hackneyed-36px
+set $CURSOR_SIZE 36
 
 set $DISPLAY eDP-1
 set $WALLPAPER_DIR $HOME/Pictures/.current-wallpaper
