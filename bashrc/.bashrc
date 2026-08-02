@@ -117,14 +117,16 @@ export EDITOR=nvim
 export VISUAL=zed
 
 alias cmatrix="cmatrix -C red"
+
 open() {
     xdg-open "$@" >/dev/null 2>&1 &
     disown
 }
 
-# Custom bash prompt script from NIX tricks
-[ -f ~/.nixprompt.bash ] && source ~/.nixprompt.bash
+if [[ -n "$DISPLAY" ]] || [[ -n "$WAYLAND_DISPLAY" ]]; then
+    # Custom bash prompt script from NIX tricks
+    [ -f ~/.nixprompt.bash ] && source ~/.nixprompt.bash
+    fastfetch
+fi
 
 . "$HOME/.cargo/env"
-
-fastfetch
