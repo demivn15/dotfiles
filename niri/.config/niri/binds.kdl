@@ -5,6 +5,7 @@ binds {
     Mod+E     { spawn "nautilus"; }
 
     Mod+Q repeat=false { close-window; }
+    Mod+N              { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+Shift+Delete   { spawn-sh "noctalia msg panel-toggle session"; }
 
     Mod+Left        { focus-column-left; }
