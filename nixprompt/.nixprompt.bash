@@ -17,7 +17,7 @@ config() {
     declare -g use_badges=true
 
     # Define custom colors
-    declare -g color_primary="#08bdba"
+    declare -g color_primary="#25be6a"
     declare -g color_secondary="#785cea"
     declare -g color_neutral="#5f5f87"
     declare -g color_global
