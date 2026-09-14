@@ -1,7 +1,3 @@
-include $HOME/.config/sway/config.d/variables
-
 exec                 systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK
 exec                 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
-exec                 mako
-exec                 sleep 1 && "$SCRIPTS_DIR/battery_monitor"
-exec                 lxpolkit
+exec noctalia

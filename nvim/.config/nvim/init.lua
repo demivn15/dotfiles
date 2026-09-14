@@ -2,15 +2,16 @@
 
 vim.pack.add({
     { src = "https://github.com/EdenEast/nightfox.nvim" },
-    { src = "https://github.com/neovim/nvim-lspconfig" },
     { src = "https://github.com/nvim-lua/plenary.nvim" },
     { src = "https://github.com/nvim-telescope/telescope.nvim" },
     { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
     { src = "https://github.com/sharkdp/fd" },
+    -- { src = "https://github.com/neovim/nvim-lspconfig" },
 })
 
 -- LSP Config
 
+--[[
 vim.lsp.enable({"lua-language-server", "pylsp", "clangd", "texlab", "quick-lint-js"})
 
 vim.lsp.config("quick-lint-js", {
@@ -42,9 +43,11 @@ vim.lsp.config("pylsp", {
 })
 
 vim.diagnostic.config({ virtual_text = true })
+]]
 
 -- Neovim Options
 
+require("vim._core.ui2").enable({})
 vim.cmd [[set completeopt+=menuone,noselect,popup]]
 vim.cmd [[noswapfile]]
 vim.cmd.colorscheme("carbonfox")
@@ -72,7 +75,7 @@ vim.opt.mouse = ""
 
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
+vim.g.netrw_winsize = 15
 vim.g.netrw_browse_split = 3
 vim.g.netrw_altfile = 1
 
@@ -87,5 +90,5 @@ vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
 -- Netrw
 vim.keymap.set("n", "<leader>e", "<cmd>Lexplore<cr>", { silent = true })
 
--- Snippets
-vim.keymap.set("n", "<space>lt", "<cmd>-1read ~/.config/nvim/snippets/latex-snippets/doc-template.tex<cr>9jvi")
+-- Change working directory
+vim.keymap.set("n", "<leader>c", "<cmd>:lcd %:p:h<cr>")
