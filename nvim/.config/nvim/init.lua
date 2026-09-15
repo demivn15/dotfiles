@@ -79,16 +79,38 @@ vim.g.netrw_winsize = 15
 vim.g.netrw_browse_split = 3
 vim.g.netrw_altfile = 1
 
+-- Terminal
+
+vim.api.nvim_create_autocmd("TermOpen", {
+    group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+    callback = function()
+        vim.opt.number = false
+        vim.opt.relativenumber = false
+    end,
+})
+
 -- Keymaps
 
 -- Telescope
-vim.keymap.set("n", "<leader>t", "<cmd>Telescope<cr>")
+vim.keymap.set("n", "<leader>tt", "<cmd>Telescope<cr>")
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
 
 -- Netrw
 vim.keymap.set("n", "<leader>e", "<cmd>Lexplore<cr>", { silent = true })
+
+
+-- Terminal
+local job_id = 0
+vim.keymap.set("n", "<leader>T", function()
+    vim.cmd.new()
+    vim.cmd.term()
+    vim.cmd.wincmd("J")
+    vim.api.nvim_win_set_height(0, 10)
+    job_id = vim.bo.channel
+    vim.fn.chansend(job_id, {"clear\r\n"})
+end)
 
 -- Change working directory
 vim.keymap.set("n", "<leader>c", "<cmd>:lcd %:p:h<cr>")

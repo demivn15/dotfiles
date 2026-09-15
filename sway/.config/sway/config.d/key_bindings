@@ -10,10 +10,11 @@ bindsym Mod4+t exec $terminalEmulator
 bindsym Mod4+Space exec $applicationMenu
 bindsym Mod4+b exec $webBrowser
 bindsym Mod4+e exec $fileManager
+bindsym Mod4+n exec noctalia msg panel-toggle control-center
 
 bindsym Mod4+q kill
 bindsym Mod4+Shift+Return reload
-bindsym Mod4+Shift+Alt+Delete exec swaymsg exit
+bindsym Mod4+Shift+Delete exec noctalia msg panel-toggle session
 
 bindsym Alt+Left focus left
 bindsym Alt+Down focus down
