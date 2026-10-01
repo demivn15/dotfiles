@@ -3,7 +3,7 @@
 
 xwayland force
 floating_modifier Mod4 normal
-floating_maximum_size 1280 x 720
+floating_maximum_size 800 x 600
 
 default_border          pixel 1
 default_floating_border pixel 1
@@ -14,7 +14,7 @@ gaps {
     }
 
 focus_follows_mouse always
-mouse_warping container
+mouse_warping none
 
 for_window [app_id=".*"] floating enable, move position center
 for_window [class=".*"] floating enable, move position center

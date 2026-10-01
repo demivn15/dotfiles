@@ -6,6 +6,9 @@ vim.pack.add({
     { src = "https://github.com/nvim-telescope/telescope.nvim" },
     { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
     { src = "https://github.com/sharkdp/fd" },
+    { src = "https://github.com/nvim-neo-tree/neo-tree.nvim", version = vim.version.range('3') },
+    { src = "https://github.com/MunifTanjim/nui.nvim" },
+    { src = "https://github.com/nvim-tree/nvim-web-devicons" },
     -- { src = "https://github.com/neovim/nvim-lspconfig" },
 })
 
@@ -48,10 +51,8 @@ vim.diagnostic.config({ virtual_text = true })
 -- Neovim Options
 
 require("vim._core.ui2").enable({})
-vim.cmd [[set completeopt+=menuone,noselect,popup]]
 vim.cmd [[noswapfile]]
 vim.cmd.colorscheme("carbonfox")
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.number = true
@@ -62,23 +63,29 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.hlsearch = false
-vim.opt.incsearch = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
 vim.opt.termguicolors = true
-vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
+vim.opt.scrolloff = 10
 vim.opt.updatetime = 250
-vim.opt.mouse = ""
+
+--[[
+vim.cmd [[set completeopt+=menuone,noselect,popup\]\]
+ vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+ vim.opt.incsearch = true
+ vim.opt.ignorecase = true
+ vim.opt.smartcase = true
+ vim.opt.signcolumn = "yes"
+ vim.opt.mouse = ""
+]]
 
 -- Netrw Config
 
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 15
+vim.g.netrw_winsize = 20
 vim.g.netrw_browse_split = 3
 vim.g.netrw_altfile = 1
 
+--[[
 -- Terminal
 
 vim.api.nvim_create_autocmd("TermOpen", {
@@ -88,19 +95,21 @@ vim.api.nvim_create_autocmd("TermOpen", {
         vim.opt.relativenumber = false
     end,
 })
+]]
 
 -- Keymaps
 
 -- Telescope
-vim.keymap.set("n", "<leader>tt", "<cmd>Telescope<cr>")
+vim.keymap.set("n", "<leader>t", "<cmd>Telescope<cr>")
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
 vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+vim.keymap.set("n", "<leader>e", "<cmd>Neotree show toggle=true position=right dir=%:p:h<cr>")
 
--- Netrw
-vim.keymap.set("n", "<leader>e", "<cmd>Lexplore<cr>", { silent = true })
+-- Change working directory
+vim.keymap.set("n", "<leader>c", "<cmd>:lcd %:p:h<cr>")
 
-
+--[[
 -- Terminal
 local job_id = 0
 vim.keymap.set("n", "<leader>T", function()
@@ -112,5 +121,13 @@ vim.keymap.set("n", "<leader>T", function()
     vim.fn.chansend(job_id, {"clear\r\n"})
 end)
 
--- Change working directory
-vim.keymap.set("n", "<leader>c", "<cmd>:lcd %:p:h<cr>")
+-- Netrw
+vim.keymap.set("n", "<leader>e", function()
+    local current_dir = vim.fn.expand("%:p:h")
+    if current_dir == "" then
+        current_dir = vim.fn.getcwd()
+    end
+    vim.cmd("Lexplore! " .. vim.fn.fnameescape(current_dir))
+end
+)
+]]
